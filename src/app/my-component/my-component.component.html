@@ -1,0 +1,142 @@
+
+<div class="recipe-list">
+  <mat-card *ngFor="let recipe of recipes" class="recipe-card">
+    <mat-card-header>
+      <mat-card-title (click)="viewFullRecipe(recipe)">{{ recipe.name }}</mat-card-title>
+      <mat-card-subtitle>{{ recipe.date | date:'mediumDate' }}</mat-card-subtitle>
+    </mat-card-header>
+  
+    <mat-card-content>
+      <div class="card-content">
+        <p>{{ recipe.recipe }}</p>
+        <img *ngIf="!currentRecipe || currentRecipe.name !== recipe.name" [src]="recipe.imageUrl" alt="{{ recipe.name }}" 
+     class="recipe-image"/>
+
+      </div>
+    </mat-card-content>
+
+
+    <mat-dialog-content *ngIf="selectedRecipe && selectedRecipe.name === recipe.name" (backdropClick)="closeFullRecipe()">
+      <div class="full-recipe" *ngIf="!(currentRecipe && currentRecipe.name === recipe.name)">
+        <p><strong>Ингредиенты:</strong></p>
+        <ul class="ingredients">
+          <li *ngFor="let ingredient of selectedRecipe.ingredients">
+            {{ ingredient.name }} - {{ ingredient.amount }} {{ ingredient.unit }}
+          </li>
+        </ul>
+        
+        <p><strong>Приготовление:</strong></p>
+        <ul class="full-recipe-display" style="list-style-type: none; margin-left: -2rem;">
+          <li *ngFor="let step of recipe.fullRecipe.split('\n')">{{ step }}</li>
+        </ul>
+        <button mat-button (click)="closeFullRecipe()">Закрыть</button>
+      </div>
+      
+    </mat-dialog-content>
+
+    <div class="edit_recipe" *ngIf="currentRecipe && currentRecipe.name === recipe.name">
+      <mat-form-field>
+        <mat-label>Улучши идею!</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="currentRecipe.fullRecipe"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5"
+        ></textarea>
+      </mat-form-field>
+      <button mat-button (click)="saveRecipe(recipe)">Сохранить</button>
+    </div>
+    
+ 
+    <mat-card-actions>
+      <button mat-button (click)="editRecipe(recipe)">Редактировать</button>
+      <button mat-button (click)="deleteRecipe(recipe)">Удалить</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+
+  <mat-card class="new-recipe-form">
+    <mat-card-header>
+      <mat-card-title>Создать новый рецепт</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Название рецепта</mat-label>
+        <input matInput [(ngModel)]="newRecipe.name" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Краткое описание</mat-label>
+        <!-- <textarea matInput [(ngModel)]="newRecipe.recipe"></textarea> -->
+        <textarea
+          matInput
+          [(ngModel)]="newRecipe.recipe"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="2"
+          cdkAutosizeMaxRows="6"
+        ></textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Полный рецепт</mat-label>
+        <!-- <textarea matInput [(ngModel)]="newRecipe.fullRecipe"></textarea> -->
+        <textarea
+           matInput
+            [(ngModel)]="newRecipe.fullRecipe"
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="6"
+            cdkAutosizeMaxRows="6"
+          ></textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Ссылка на изображение</mat-label>
+        <input matInput [(ngModel)]="newRecipe.imageUrl" />
+      </mat-form-field>
+
+      <div class="ingredients">
+        <p><strong>Ингредиенты:</strong></p>
+        
+        <div *ngFor="let ingredient of newRecipe.ingredients; let i = index">
+          <mat-form-field>
+            <mat-label>Ингредиент</mat-label>
+            <input  matInput [(ngModel)]="ingredient.name" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Количество</mat-label>
+            <input matInput type="number" [(ngModel)]="ingredient.amount" min="0" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Единица</mat-label>
+            <mat-select [(ngModel)]="ingredient.unit">
+              <mat-option *ngFor="let unit of units" [value]="unit">{{ unit }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+
+          <button class="minus"*ngIf='newRecipe.ingredients.length > 1'mat-button (click)="removeIngredient(i)">-</button>
+        </div>
+
+        <button class="plus" mat-button (click)="addIngredient()">+</button>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-button (click)="createRecipe()">Добавить рецепт</button>
+    </mat-card-actions>
+  </mat-card>
+
+<style>
+
+      
+
+</style>
+

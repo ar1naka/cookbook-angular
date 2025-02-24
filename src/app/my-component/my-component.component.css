@@ -1,0 +1,187 @@
+/* список рецептов */
+.recipe-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+    height: max-content;
+  }
+
+.recipe-card {
+    width: calc(33.333% - 16px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.recipe-card mat-card-header {
+    background-color: #f3efd3;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.recipe-card mat-card-title {
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: #333;
+}
+
+.recipe-card mat-card-title:hover {
+    font-size: 1.5rem;
+}
+
+.recipe-card mat-card-subtitle {
+    color: #777;
+    font-size: 0.875rem;
+}
+
+.card-content {
+    padding: 16px;
+    color: #555;
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+
+    p {
+    flex-shrink: 1;
+    }
+}
+
+
+.recipe-card mat-card-content p {
+    font-size: 1rem;
+    line-height: 1.5; 
+    margin-left: 1rem;
+}
+
+.full-recipe {
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 600px;
+}
+
+mat-dialog-content .full-recipe button {
+    margin-left: 40%;
+}
+
+.full-recipe p {
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.full-recipe ul {
+    margin-left: 10px;
+}
+
+.full-recipe mat-button {
+    align-self: center;
+    border: 1px;
+}
+
+.edit_recipe {
+    background: #f9f9f9; 
+    padding: 20px;
+    border-radius: 12px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
+}
+
+.edit_recipe mat-form-field {
+    width: 100%;
+}
+
+.edit_recipe textarea {
+    min-height: 120px;
+    font-size: 16px;
+}
+
+.recipe-image {
+    align-self: center;
+    width: 75%;
+    height: 150px; 
+    margin-bottom: 15px; 
+}
+
+.edit_recipe button {
+    width: 100%;
+    margin-top: 16px;
+}
+
+.recipe-card mat-card-actions {
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    margin-bottom: 0;
+}
+
+.recipe-card mat-card-actions button {
+    width: 48%;
+}
+
+/* создание рецептов */
+
+.new-recipe-form {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 16px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+mat-form-field {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.ingredients div {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.ingredients mat-form-field {
+    flex: 1;
+}
+
+.recipe-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+button {
+    color: #555 !important;
+}
+
+button.plus {
+    float: right;
+    margin-top: -10px;
+}
+button.minus{
+    margin-top: -30px;
+}
+
+button:hover, button.plus {
+    background-color: #f3efd3;
+}
+
+@media (max-width: 768px) {
+    .recipe-card {
+    width: calc(50% - 16px);
+    }
+}
+
+@media (max-width: 480px) {
+    .recipe-card {
+    width: 100%;
+    }
+}
